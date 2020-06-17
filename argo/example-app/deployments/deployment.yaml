@@ -22,9 +22,97 @@ spec:
     spec:
       containers:
       - name: example-app
-        image: aimvector/python:1.0.2
+        image: aimvector/python:1.0.1
         imagePullPolicy: Always
         ports:
+
+1
+
+apiVersion: apps/v1
+
+2
+
+kind: Deployment
+
+3
+
+metadata:
+
+4
+
+  name: example-deploy
+
+5
+
+  labels:
+
+6
+
+    app: example-app
+
+7
+
+  annotations:
+
+8
+
+spec:
+
+9
+
+  selector:
+
+10
+
+    matchLabels:
+
+11
+
+      app: example-app
+
+12
+
+  replicas: 2
+
+13
+
+  strategy:
+
+14
+
+    type: RollingUpdate
+
+15
+
+    rollingUpdate:
+
+16
+
+      maxSurge: 1
+
+17
+
+      maxUnavailable: 0
+
+18
+
+  template:
+
+19
+
+    metadata:
+
+20
+
+      labels:
+
+21
+
+        app: example-app
+
+22
+
+    spec:
         - containerPort: 5000
         resources:
           requests:
